@@ -9,6 +9,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+    icon: path.join(__dirname, "assets/icons/windows/securedash.ico"),
   });
   mainWindow.loadFile("index.html");
   var splash = new BrowserWindow({
@@ -17,6 +18,7 @@ function createWindow() {
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    icon: path.join(__dirname, "assets/icons/windows/securedash.ico"),
   });
 
   splash.loadFile("splash.html");
