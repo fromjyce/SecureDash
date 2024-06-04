@@ -58,21 +58,3 @@ color: #D70040;
     font-size: 1.5rem;
      color: white;
 }
-
-.right-sidemenu{
-    height: 100%;
-  width: 150px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #343434 ;
-  overflow-x: hidden;
-  padding-top: 20px;
-  text-align: center;
-}
-
-.logo-button-menu{
-    width: 14px;
-    height: 28px;
-}
