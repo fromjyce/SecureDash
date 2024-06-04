@@ -1,52 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
 body {
-    background-color: #f9f9fa;
-    background-image: url('assets/background.jpg');
+    background-color: #353935;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.flex {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto
+.logo-splash {
+    width: 134px;
+    height: 150px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
-    .loader {
-        border: 5px solid rgba(18, 65, 145, 255);
-        border-radius: 50%;
-        border-top: 5px solid #ffffff;
-        width: 40px;
-        height: 40px;
-        -webkit-animation: spin 1s linear infinite;
-        /* Safari */
-        animation: spin 1s linear infinite;
-        margin: auto;
-        left: 0;
-        right: 0;
-        top: 0px;
-        bottom: 0;
-        position: fixed;
-    }
 
-    /* Safari */
-    @-webkit-keyframes spin {
-        0% {
-            -webkit-transform: rotate(0deg);
-        }
-
-        100% {
-            -webkit-transform: rotate(360deg);
-        }
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .center {
-        border: none !important;
-        text-align: center;
-    }
+.app-title {
+    font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #D70040;
+  
+}
