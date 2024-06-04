@@ -1,5 +1,9 @@
 {
   "name": "securedash",
-  "version": "0.1.0",
-  "main": "main.js"
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
 }
