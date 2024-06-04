@@ -55,7 +55,8 @@ ipcMain.on("start-python", (event, arg) => {
 
 ipcMain.on("stop-python", (event, arg) => {
   if (pythonProcess) {
-    process.kill(pythonProcess.pid);
+    const { pid } = pythonProcess;
+    process.kill(pid);
     pythonProcess = null;
   }
 });
