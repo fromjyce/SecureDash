@@ -40,17 +40,17 @@ ipcMain.on("start-python", (event, arg) => {
   pythonProcess = spawn("python", [scriptPath], {
     env: { ...process.env, PYTHONIOENCODING: "utf-8", TF_ENABLE_ONEDNN_OPTS: "0" }});
 
-  pythonProcess.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-  });
+  //pythonProcess.stdout.on("data", (data) => {
+  //  console.log(`stdout: ${data}`);
+  //});
 
-  pythonProcess.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
+  //pythonProcess.stderr.on("data", (data) => {
+  //  console.error(`stderr: ${data}`);
+  //});
 
-  pythonProcess.on("close", (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
+  //pythonProcess.on("close", (code) => {
+  //  console.log(`child process exited with code ${code}`);
+  //});
 });
 
 ipcMain.on("stop-python", (event, arg) => {
