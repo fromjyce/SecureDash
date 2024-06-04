@@ -95,4 +95,14 @@ color: #D70040;
     background-color: #D70040;
     border-radius: 20%;
     margin: auto;
+    text-align: center;
+    display: flex;
+  justify-content: center;
+}
+
+.play-button{
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin: auto;
 }
