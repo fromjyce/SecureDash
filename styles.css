@@ -100,9 +100,17 @@ color: #D70040;
   justify-content: center;
 }
 
+.playbutton-container, .stopbutton-container:hover{
+    cursor: pointer;
+}
+
 .play-button, .stop-button{
   width: 50%;
   height: 50%;
   display: block;
   margin: auto;
+}
+
+.play-button, .stop-button:hover{
+    cursor: pointer;
 }
