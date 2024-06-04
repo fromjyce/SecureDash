@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 
 function createWindow() {
@@ -12,6 +12,7 @@ function createWindow() {
     icon: path.join(__dirname, "assets/icons/windows/securedash.ico"),
   });
   mainWindow.loadFile("index.html");
+  Menu.setApplicationMenu(null);
   var splash = new BrowserWindow({
     width: 500,
     height: 300,
