@@ -1,7 +1,7 @@
 {
   "name": "securedash",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A real-time monitoring dashboard leveraging machine learning to enhance Smart Grid security against cyber threats.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
