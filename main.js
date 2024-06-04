@@ -1,5 +1,8 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
+const { spawn, exec } = require("child_process");
+
+let pythonProcess;
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -8,6 +11,8 @@ function createWindow() {
     show: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: false,
     },
     icon: path.join(__dirname, "assets/icons/windows/securedash.ico"),
   });
@@ -29,6 +34,33 @@ function createWindow() {
     mainWindow.center();
     mainWindow.show();
   }, 3000);
+
+ipcMain.on("start-python", (event, arg) => {
+  const scriptPath = path.join(__dirname, "scripts", "data_to_powerbi_main.py");
+  pythonProcess = spawn("python", [scriptPath], {
+    env: { ...process.env, PYTHONIOENCODING: "utf-8", TF_ENABLE_ONEDNN_OPTS: "0" }});
+
+  pythonProcess.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  pythonProcess.on("close", (code) => {
+    console.log(`child process exited with code ${code}`);
+  });
+});
+
+ipcMain.on("stop-python", (event, arg) => {
+  if (pythonProcess) {
+    process.kill(pythonProcess.pid);
+    pythonProcess = null;
+  }
+});
+
+
 }
 app.whenReady().then(() => {
   createWindow();
