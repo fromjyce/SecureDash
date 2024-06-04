@@ -1,3 +1,78 @@
-/* styles.css */
 
-/* Add styles here to customize the appearance of your app */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+    background-color: #0C090A;
+}
+
+.left-sidemenu {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #343434 ;
+  overflow-x: hidden;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.logo-menu {
+    width: 74px;
+    height: 90px;
+}
+
+.menu-logo-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    margin-top: 10px;
+color: #D70040;
+}
+
+.home {
+    margin-top: 50px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.past-runs {
+    margin-top: 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5rem;
+     color: white;
+}
+
+.settings {
+    margin-top: 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5rem;
+     color: white;
+}
+
+.right-sidemenu{
+    height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #343434 ;
+  overflow-x: hidden;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.logo-button-menu{
+    width: 14px;
+    height: 28px;
+}
