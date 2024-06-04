@@ -100,7 +100,7 @@ color: #D70040;
   justify-content: center;
 }
 
-.play-button{
+.play-button, .stop-button{
   width: 50%;
   height: 50%;
   display: block;
