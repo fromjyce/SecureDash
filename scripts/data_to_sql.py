@@ -8,7 +8,7 @@ import requests
 import json
 
 # Load the trained model
-model = load_model('IDS_Model_3.h5')
+model = load_model('{your_model.h5}')
 scaler = StandardScaler()
 
 db_config = {
