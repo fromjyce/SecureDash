@@ -74,5 +74,25 @@ color: #D70040;
 
 .logo-menu-button{
     width: 50px;
-    height: 66px;
+    height: 59px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.playbutton-container, .stopbutton-container {
+        width: 50px;
+    height: 50px;
+    background-color: #D70040;
+    border-radius: 20%;
+    margin: auto;
 }
