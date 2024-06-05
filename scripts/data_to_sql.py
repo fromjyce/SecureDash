@@ -8,14 +8,14 @@ import requests
 import json
 
 # Load the trained model
-model = load_model('{your_model.h5}')
+model = load_model(r'scripts\model.h5')
 scaler = StandardScaler()
 
 db_config = {
-    'user': '{your_username}',
-    'password': '{your_pwd}',
-    'host': '{your_hostname}',
-    'database': '{your_db_name}',
+    'user': 'root',
+    'password': 'Jayas1709#',
+    'host': 'localhost',
+    'database': 'securedash',
 }
 
 def extract_features(packet):
@@ -131,7 +131,6 @@ def process_packet(packet):
         'total_backward_packets': total_backward_packets,
         'status': status
     }
-    print(f"Source IP Address: {source_ip}, Destination IP Address: {destination_ip}, Timestamp: {timestamp}: Packet prediction: {status}")
     return data
 
 def main(packet):
