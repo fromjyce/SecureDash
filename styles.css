@@ -105,8 +105,8 @@ color: #D70040;
 }
 
 .play-button, .stop-button{
-  width: 50%;
-  height: 50%;
+  width: 27px;
+  height: 27px;
   display: block;
   margin: auto;
 }
@@ -118,4 +118,68 @@ color: #D70040;
 
 .play-button, .stop-button:hover{
     cursor: pointer;
+}
+
+.main-body {
+  display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    align-content: center;
+}
+
+.main-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  align-content: center;
+  gap: 50px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 32px;
+}
+
+.check-power-bi, .check-database {
+  width: 150px;
+    height: 150px;
+    background-color: #343434;
+    border-radius: 20%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.power-bi-logo, .dashboard-logo{
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin: auto;
+}
+
+.power-bi-tab, .database-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+    text-align: center;
+}
+
+.database-tab {
+  margin-top: -1px;
+}
+
+.power-bi-title, .dashboard-title{
+ font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  color: #D70040;
+  text-align: center;
+  font-size: 1.7rem;
+  margin-top: 25px;
 }
