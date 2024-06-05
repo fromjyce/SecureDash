@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packet Data</title>
-    <style>
+    <title>Records</title>
+        <style>
         table {
             border-collapse: collapse;
             width: 100%;
@@ -32,6 +32,12 @@
         <button type="submit">Search</button>
     </form>
     <form method="get">
+        <button type="submit" name="order" value="desc">
+            Latest at Top &#9650;
+        </button>
+        <button type="submit" name="order" value="asc">
+            Latest at Bottom &#9660;
+        </button>
         <button type="submit">Refresh</button>
     </form>
     <table>
@@ -41,10 +47,10 @@
                 <th>Source IP</th>
                 <th>Destination IP</th>
                 <th>Timestamp</th>
-                <th>Status</th>
                 <th>Protocol</th>
                 <th>Total Forward Packets</th>
                 <th>Total Backward Packets</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
