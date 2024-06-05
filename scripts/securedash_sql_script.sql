@@ -16,14 +16,11 @@ CREATE TABLE packet_data (
     source_ip VARCHAR(45),
     destination_ip VARCHAR(45),
     timestamp DATETIME,
-    status VARCHAR(10),
-    flow_duration INT,
     protocol INT,
     total_fwd_packets INT,
-    total_backward_packets INT
+    total_backward_packets BIGINT,
+	status VARCHAR(10)
 );
 
 SELECT * from packet_data; 
-
-ALTER table packet_data DROP flow_duration;
 

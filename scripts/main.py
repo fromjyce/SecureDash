@@ -222,10 +222,10 @@ def main(packet):
     while True:
         data, sql_data = process_packet(packet)
         response = requests.post(url, headers=headers, data=json.dumps(data))
-        insert_query = ("INSERT INTO packet_data "
-                        "(source_ip, destination_ip, timestamp, protocol, total_fwd_packets, total_backward_packets, status) "
+        insert_query = ("INSERT INTO packet_data"
+                        "(source_ip, destination_ip, timestamp, protocol, total_fwd_packets, total_backward_packets, status)"
                         "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-        cursor.execute(insert_query, (sql_data['source_ip'], sql_data['destination_ip'], sql_data['timestamp'], sql_data['protocol'], sql_data['total_fwd_packets'], sql_data['total_backward_packets'], sql_data['status']))
+        cursor.execute(insert_query, (sql_data['source_ip'], sql_data['destination_ip'], sql_data['timestamp'], sql_data['protocol'], sql_data['total_fwd_packets'], sql_data['total_backward_packets'],  sql_data['status']))
         conn.commit()
 
 sniff(prn=main)
