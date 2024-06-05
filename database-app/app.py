@@ -19,6 +19,9 @@ def index():
     if request.method == 'POST':
         start_timestamp = request.form.get('start_timestamp')
         end_timestamp = request.form.get('end_timestamp')
+        if not start_timestamp or not end_timestamp:
+            error_message = "Please select both start and end timestamps."
+            return render_template('index.html', error_message=error_message)
         cur = mysql.connection.cursor()
         cur.execute(f"SELECT * FROM packet_data WHERE timestamp BETWEEN %s AND %s ORDER BY timestamp {sort_order}", (start_timestamp, end_timestamp))
         data = cur.fetchall()
