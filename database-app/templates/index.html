@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packet Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Packet Data</h1>
+    <form method="post">
+        <label for="start_timestamp">Start Timestamp:</label>
+        <input type="datetime-local" id="start_timestamp" name="start_timestamp">
+        <label for="end_timestamp">End Timestamp:</label>
+        <input type="datetime-local" id="end_timestamp" name="end_timestamp">
+        <button type="submit">Search</button>
+    </form>
+    <form method="get">
+        <button type="submit">Refresh</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Source IP</th>
+                <th>Destination IP</th>
+                <th>Timestamp</th>
+                <th>Status</th>
+                <th>Protocol</th>
+                <th>Total Forward Packets</th>
+                <th>Total Backward Packets</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="9">No data found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>
