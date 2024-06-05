@@ -30,20 +30,12 @@ cumulative_data = {
     'alert_destination_ip': set(),
     'normal_protocol': 0,
     'alert_protocol': 0,
-    'normal_flow_duration': 0,
-    'alert_flow_duration': 0,
     'normal_total_fwd_packets': 0,
     'alert_total_fwd_packets': 0,
     'normal_total_backward_packets': 0,
     'alert_total_backward_packets': 0,
-    'normal_fwd_packets_length_total': 0,
-    'alert_fwd_packets_length_total': 0,
-    'normal_bwd_packets_length_total': 0,
-    'alert_bwd_packets_length_total': 0,
     'total_normal_packets': 0,
-    'total_alert_packets': 0,
-    'total_normal_packets_length': 0,
-    'total_alert_packets_length': 0
+    'total_alert_packets': 0
 }
 
 def extract_features(packet):
@@ -143,7 +135,7 @@ def predict_packet(packet):
     return prediction, source_ip, destination_ip, protocol, flow_duration, total_fwd_packets, total_backward_packets, fwd_packets_length_total, bwd_packets_length_total
 
 def classification(prediction):
-    return "ALERT" if prediction[0][0] > prediction[0][1] else "NORMAL"
+    return "MALIGNANT" if prediction[0][0] > prediction[0][1] else "BENIGN"
 
 def process_packet(packet):
     global cumulative_data
@@ -161,30 +153,22 @@ def process_packet(packet):
         'status': status
     }
 
-    if status == "ALERT":
+    if status == "MALIGNANT":
         cumulative_data['alert_count'] += 1
         cumulative_data['alert_source_ip'].add(source_ip)
         cumulative_data['alert_destination_ip'].add(destination_ip)
         cumulative_data['alert_protocol'] += protocol
-        cumulative_data['alert_flow_duration'] += flow_duration
         cumulative_data['alert_total_fwd_packets'] += total_fwd_packets
         cumulative_data['alert_total_backward_packets'] += total_backward_packets
-        cumulative_data['alert_fwd_packets_length_total'] += fwd_packets_length_total
-        cumulative_data['alert_bwd_packets_length_total'] += bwd_packets_length_total
         cumulative_data['total_alert_packets'] += total_fwd_packets + total_backward_packets
-        cumulative_data['total_alert_packets_length'] += fwd_packets_length_total + bwd_packets_length_total
     else:
         cumulative_data['normal_count'] += 1
         cumulative_data['normal_source_ip'].add(source_ip)
         cumulative_data['normal_destination_ip'].add(destination_ip)
         cumulative_data['normal_protocol'] += protocol
-        cumulative_data['normal_flow_duration'] += flow_duration
         cumulative_data['normal_total_fwd_packets'] += total_fwd_packets
         cumulative_data['normal_total_backward_packets'] += total_backward_packets
-        cumulative_data['normal_fwd_packets_length_total'] += fwd_packets_length_total
-        cumulative_data['normal_bwd_packets_length_total'] += bwd_packets_length_total
         cumulative_data['total_normal_packets'] += total_fwd_packets + total_backward_packets
-        cumulative_data['total_normal_packets_length'] += fwd_packets_length_total + bwd_packets_length_total
     
     data = [
         {
@@ -197,20 +181,12 @@ def process_packet(packet):
             'alert_destination_ip': len(cumulative_data['alert_destination_ip']),
             'normal_protocol': cumulative_data['normal_protocol'],
             'alert_protocol': cumulative_data['alert_protocol'],
-            'normal_flow_duration': cumulative_data['normal_flow_duration'],
-            'alert_flow_duration': cumulative_data['alert_flow_duration'],
             'normal_total_fwd_packets': cumulative_data['normal_total_fwd_packets'],
             'alert_total_fwd_packets': cumulative_data['alert_total_fwd_packets'],
             'normal_total_backward_packets': cumulative_data['normal_total_backward_packets'],
             'alert_total_backward_packets': cumulative_data['alert_total_backward_packets'],
-            'normal_fwd_packets_length_total': cumulative_data['normal_fwd_packets_length_total'],
-            'alert_fwd_packets_length_total': cumulative_data['alert_fwd_packets_length_total'],
-            'normal_bwd_packets_length_total': cumulative_data['normal_bwd_packets_length_total'],
-            'alert_bwd_packets_length_total': cumulative_data['alert_bwd_packets_length_total'],
             'total_normal_packets': cumulative_data['total_normal_packets'],
             'total_alert_packets': cumulative_data['total_alert_packets'],
-            'total_normal_packets_length': cumulative_data['total_normal_packets_length'],
-            'total_alert_packets_length': cumulative_data['total_alert_packets_length'],
             'timestamp': timestamp
         }
     ]

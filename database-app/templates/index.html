@@ -113,7 +113,7 @@
                 <td>{{ row[4] }}</td>
                 <td>{{ row[5] }}</td>
                 <td>{{ row[6] }}</td>
-                <td class="{% if row[7] == 'NORMAL' %}status-normal{% elif row[7] == 'ALERT' %}status-alert{% endif %}">{{ row[7] }}</td>
+                <td class="{% if row[7] == 'BENIGN' %}status-normal{% elif row[7] == 'MALIGNANT' %}status-alert{% endif %}">{{ row[7] }}</td>
             </tr>
             {% endfor %}
             {% else %}
