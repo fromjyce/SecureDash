@@ -154,6 +154,11 @@ color: #D70040;
   align-items: center;
 }
 
+.check-power-bi:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .power-bi-logo, .dashboard-logo{
   width: 50%;
   height: 50%;
