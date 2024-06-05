@@ -21,4 +21,12 @@ window.onload = () => {
     playButton.classList.remove("disabled");
     checkPowerBiButton.disabled = true;
   };
+
+  checkPowerBiButton.addEventListener("click", () => {
+    if (!checkPowerBiButton.disabled) {
+      const url =
+        "https://app.powerbi.com/groups/me/dashboards/3182bc43-4271-4a61-8df8-e86f978c90f1?experience=power-bi";
+      window.open(url, "_blank");
+    }
+  });
 };
