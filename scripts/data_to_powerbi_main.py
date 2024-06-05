@@ -8,9 +8,9 @@ import json
 import ipaddress
 
 # Load the trained model
-model = load_model('scripts/model.h5')
+model = load_model('{your_model_name}')
 scaler = StandardScaler()
-url = "https://api.powerbi.com/beta/5beb351c-3fb8-418f-b612-fe36ace96ef3/datasets/2b4f3d39-802c-4215-8fa6-a55cd6ac4177/rows?experience=power-bi&key=xO4Ca1dOSvwuGABqxIDYIkWYiWG%2FT3hsWfVswi6y45wKXILaIEeogAHIO9I9Vk3IlsQn7ooECCrFb4kCF1iGDA%3D%3D"
+url = "{your_push_url}"
 headers = {'Content-Type': 'application/json'}
 
 cumulative_data = {
