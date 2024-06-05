@@ -8,14 +8,14 @@ import requests
 import json
 
 # Load the trained model
-model = load_model(r'scripts\model.h5')
+model = load_model('{model_name}')
 scaler = StandardScaler()
 
 db_config = {
-    'user': 'root',
-    'password': 'Jayas1709#',
-    'host': 'localhost',
-    'database': 'securedash',
+    'user': '{your_username}',
+    'password': '{your_password}',
+    'host': '{your_host}',
+    'database': '{your_dashboard_name}',
 }
 
 def extract_features(packet):
@@ -104,12 +104,12 @@ def extract_features(packet):
 
 def predict_packet(packet):
     features = extract_features(packet)
-    source_ip, destination_ip, protocol, flow_duration, total_fwd_packets, total_backward_packets = features[0], features[1], features[2], features[3], features[4], features[5]
+    source_ip, destination_ip, protocol, total_fwd_packets, total_backward_packets = features[0], features[1], features[2], features[4], features[5]
     needed_features = features[2:]
     needed_features = np.array(needed_features).reshape((1, len(needed_features)))
     scaled_features = scaler.fit_transform(needed_features)
     prediction = model.predict(scaled_features)
-    return prediction, source_ip, destination_ip, protocol, flow_duration, total_fwd_packets, total_backward_packets
+    return prediction, source_ip, destination_ip, protocol, total_fwd_packets, total_backward_packets
 
 def classification(prediction):
     if prediction[0][0] > prediction[0][1]:
@@ -118,7 +118,7 @@ def classification(prediction):
         return "NORMAL"
 
 def process_packet(packet):
-    prediction, source_ip, destination_ip, protocol, flow_duration, total_fwd_packets, total_backward_packets = predict_packet(packet)
+    prediction, source_ip, destination_ip, protocol, total_fwd_packets, total_backward_packets = predict_packet(packet)
     timestamp = datetime.now().isoformat()
     status = classification(prediction)
     data = {
@@ -126,7 +126,6 @@ def process_packet(packet):
         'destination_ip': destination_ip,
         'timestamp': timestamp,
         'protocol': protocol,
-        'flow_duration': flow_duration,
         'total_fwd_packets': total_fwd_packets,
         'total_backward_packets': total_backward_packets,
         'status': status
@@ -139,10 +138,9 @@ def main(packet):
     while True:
         data = process_packet(packet)
         insert_query = ("INSERT INTO packet_data "
-                        "(source_ip, destination_ip, timestamp, protocol, flow_duration, total_fwd_packets, total_backward_packets, status) "
-                        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
-        cursor.execute(insert_query, (data['source_ip'], data['destination_ip'], data['timestamp'], data['protocol'],
-                                      data['flow_duration'], data['total_fwd_packets'], data['total_backward_packets'], data['status']))
+                        "(source_ip, destination_ip, timestamp, protocol, total_fwd_packets, total_backward_packets, status) "
+                        "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+        cursor.execute(insert_query, (data['source_ip'], data['destination_ip'], data['timestamp'], data['protocol'], data['total_fwd_packets'], data['total_backward_packets'], data['status']))
         conn.commit()
         print(f"Data sent to MySQL: {cursor.rowcount} record inserted.")
 
