@@ -4,6 +4,7 @@ window.onload = () => {
   const playButton = document.getElementById("play-button");
   const stopButton = document.getElementById("stop-button");
   const checkPowerBiButton = document.getElementById("check-power-bi");
+  const checkDatabaseButton = document.getElementById("check-database");
 
   stopButton.classList.add("disabled");
   checkPowerBiButton.disabled = true;
@@ -29,4 +30,9 @@ window.onload = () => {
       window.open(url, "_blank");
     }
   });
+
+  checkDatabaseButton.addEventListener("click", () => {
+    ipcRenderer.send("open-database-window");
+  });
+
 };

@@ -1,11 +1,15 @@
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
-const { spawn, exec } = require("child_process");
+const { spawn } = require("child_process");
+const http = require("http");
 
 let pythonProcess;
+let flaskProcess;
+let mainWindow;
+let flaskWindow;
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     show: false,
@@ -16,9 +20,11 @@ function createWindow() {
     },
     icon: path.join(__dirname, "assets/icons/windows/securedash.ico"),
   });
+
   mainWindow.loadFile("index.html");
   Menu.setApplicationMenu(null);
-  var splash = new BrowserWindow({
+
+  const splash = new BrowserWindow({
     width: 500,
     height: 300,
     transparent: true,
@@ -35,34 +41,109 @@ function createWindow() {
     mainWindow.show();
   }, 3000);
 
-ipcMain.on("start-python", (event, arg) => {
-  const scriptPath = path.join(__dirname, "scripts", "data_to_powerbi_main.py");
-  pythonProcess = spawn("python", [scriptPath], {
-    env: { ...process.env, PYTHONIOENCODING: "utf-8", TF_ENABLE_ONEDNN_OPTS: "0" }});
+  ipcMain.on("start-python", (event, arg) => {
+    const scriptPath = path.join(
+      __dirname,
+      "scripts",
+      "data_to_powerbi_main.py"
+    );
+    pythonProcess = spawn("python", [scriptPath], {
+      env: {
+        ...process.env,
+        PYTHONIOENCODING: "utf-8",
+        TF_ENABLE_ONEDNN_OPTS: "0",
+      },
+    });
+  });
 
-  //pythonProcess.stdout.on("data", (data) => {
-  //  console.log(`stdout: ${data}`);
-  //});
+  ipcMain.on("stop-python", (event, arg) => {
+    if (pythonProcess) {
+      const { pid } = pythonProcess;
+      process.kill(pid);
+      pythonProcess = null;
+    }
+  });
 
-  //pythonProcess.stderr.on("data", (data) => {
-  //  console.error(`stderr: ${data}`);
-  //});
+  ipcMain.on("open-database-window", () => {
+    if (!flaskProcess) {
+      flaskProcess = spawn("python", ["app.py"], {
+        cwd: path.join(__dirname, "database-app"),
+        env: { ...process.env, PYTHONIOENCODING: "utf-8" },
+      });
 
-  //pythonProcess.on("close", (code) => {
-  //  console.log(`child process exited with code ${code}`);
-  //});
-});
+      flaskProcess.on("close", (code) => {
+        console.log(`Flask process exited with code ${code}`);
+        flaskProcess = null;
+        if (flaskWindow) {
+          flaskWindow.close();
+          flaskWindow = null;
+        }
+      });
 
-ipcMain.on("stop-python", (event, arg) => {
-  if (pythonProcess) {
-    const { pid } = pythonProcess;
-    process.kill(pid);
-    pythonProcess = null;
-  }
-});
+      const checkServer = (retryCount = 5) => {
+        http
+          .get("http://127.0.0.1:5000", (res) => {
+            if (res.statusCode === 200) {
+              if (!flaskWindow) {
+                flaskWindow = new BrowserWindow({
+                  width: 800,
+                  height: 600,
+                  webPreferences: {
+                    nodeIntegration: true,
+                    contextIsolation: false,
+                  },
+                });
+              }
+              flaskWindow.loadURL("http://127.0.0.1:5000");
+              flaskWindow.show();
 
+              flaskWindow.on("closed", () => {
+                flaskWindow = null;
+                if (flaskProcess) {
+                  const { pid } = flaskProcess;
+                  process.kill(pid);
+                  flaskProcess = null;
+                }
+              });
+            } else if (retryCount > 0) {
+              setTimeout(() => checkServer(retryCount - 1), 500);
+            }
+          })
+          .on("error", () => {
+            if (retryCount > 0) {
+              setTimeout(() => checkServer(retryCount - 1), 500);
+            }
+          });
+      };
 
+      checkServer();
+    } else {
+      if (!flaskWindow) {
+        flaskWindow = new BrowserWindow({
+          width: 800,
+          height: 600,
+          webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+          },
+        });
+
+        flaskWindow.loadURL("http://127.0.0.1:5000");
+        flaskWindow.show();
+
+        flaskWindow.on("closed", () => {
+          flaskWindow = null;
+          if (flaskProcess) {
+            const { pid } = flaskProcess;
+            process.kill(pid);
+            flaskProcess = null;
+          }
+        });
+      }
+    }
+  });
 }
+
 app.whenReady().then(() => {
   createWindow();
 
@@ -70,6 +151,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
+
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
