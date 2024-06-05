@@ -13,11 +13,12 @@
    <div class="right-sidemenu">
     <img src="assets\securedash.png" class="logo-menu-button" alt="logo">
     <div class="buttons-container">
-    <div class="playbutton-container">
-      <img src="assets\play_button.png" class="play-button" alt="logo" onclick="startPython()">
-    </div>
-    <div class="stopbutton-container">
-      <img src="assets\stop_button.png" class="stop-button" alt="logo" onclick="stopPython()">
+    <button id="play-button" class="playbutton-container" onclick="startPython()">
+      <img src="assets\play_button.png" class="play-button" alt="play-logo">
+    </button>
+    <button id="stop-button" class="stopbutton-container disabled" onclick="stopPython()">
+      <img src="assets\stop_button.png" class="stop-button" alt="stop-logo">
+    </button>
     </div>
     </div>
    </div>

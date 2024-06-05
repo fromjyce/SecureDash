@@ -111,6 +111,11 @@ color: #D70040;
   margin: auto;
 }
 
+.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+}
+
 .play-button, .stop-button:hover{
     cursor: pointer;
 }
