@@ -45,7 +45,7 @@ function createWindow() {
     const scriptPath = path.join(
       __dirname,
       "scripts",
-      "data_to_powerbi_main.py"
+      "main.py"
     );
     pythonProcess = spawn("python", [scriptPath], {
       env: {
