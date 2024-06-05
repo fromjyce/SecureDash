@@ -24,3 +24,6 @@ CREATE TABLE packet_data (
 );
 
 SELECT * from packet_data; 
+
+ALTER table packet_data DROP flow_duration;
+
