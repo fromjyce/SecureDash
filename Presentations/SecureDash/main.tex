@@ -91,5 +91,25 @@
 \end{enumerate}
 \end{frame}
 
+\section{Machine Learning Model Development}
+
+\begin{frame}{Machine Learning Model Development}
+\begin{enumerate}
+    \item \textbf{Hybrid Deep Learning Model}: Combines Convolutional Neural Network (CNN) and Gated recurrent unit (GRU) for effective feature extraction and sequence learning.
+    \item \textbf{Data Preprocessing}: Features scaled using Standard Scaler, and class imbalance addressed with ADASYN.
+    \item \textbf{Model Architecture}
+    \begin{itemize}
+        \item \textbf{CNN} for feature extraction.
+        \item \textbf{GRU} for capturing long-term dependencies
+        \item \textbf{Flattening} CNN Layer for Feature Integration
+        \item \textbf{Concatenation} Layer for Merging Outputs from CNN and GRU
+        \item Addition of \textbf{Fully Connected} Layer
+        \item \textbf{Dropout Layer} to Prevent \textit{Overfitting}
+        \item \textbf{SoftMax Layer} for \textit{Classification}
+    \end{itemize}
+    \item \textbf{Training}: The model was trained on the \href{https://www.unb.ca/cic/datasets/ddos-2019.html}{\textbf{CIC-DDOS2019}} dataset.
+\end{enumerate}
+\end{frame}
+
 
 \end{document}
