@@ -33,6 +33,9 @@
   \vskip0pt%
 }
 
+\setbeamertemplate{headline}{}
+
+%\logo{\includegraphics[height=1cm]{images/securedash.png}}
 
 \AtBeginSection[]
 {
@@ -46,13 +49,8 @@
 
 \begin{document}
 
-%The next statement creates the title page.
 \frame{\titlepage}
 
-
-%---------------------------------------------------------
-%This block of code is for the table of contents after
-%the title page
 \begin{frame}
 \frametitle{Table of Contents}
 \tableofcontents
@@ -60,35 +58,10 @@
 %---------------------------------------------------------
 
 
-\section{First section}
-
-%---------------------------------------------------------
-%Changing visivility of the text
-\begin{frame}
-\frametitle{Sample frame title}
-This is a text in second frame. For the sake of showing an example.
-
-\begin{itemize}
-    \item<1-> Text visible on slide 1
-    \item<2-> Text visible on slide 2
-    \item<3> Text visible on slides 3
-    \item<4-> Text visible on slide 4
-\end{itemize}
+\section{Project Overview}
+\begin{frame}{Project Overview}
+\par This project aims to enhance Smart Grid security by developing an advanced intrusion detection system that leverages machine learning to combat cyber threats, such as DDoS attacks. The primary goal is to advance intrusion detection capabilities within smart energy grids, ensuring uninterrupted operation and safety in our increasingly digital world. By integrating real-time monitoring, advanced anomaly detection, and robust threat mitigation strategies, the project seeks to protect critical infrastructure from evolving cyber threats and maintain the reliability and resilience of modern energy grids.
 \end{frame}
-
-%---------------------------------------------------------
-
-
-%---------------------------------------------------------
-%Example of the \pause command
-\begin{frame}
-In this slide \pause
-
-the text will be partially visible \pause
-
-And finally everything will be there
-\end{frame}
-%---------------------------------------------------------
 
 \section{Second section}
 
