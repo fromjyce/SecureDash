@@ -3,13 +3,12 @@ CREATE DATABASE securedash;
 use securedash;
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(255) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL UNIQUE
 );
-
-ALTER TABLE users ADD COLUMN name VARCHAR(255) NOT NULL;
-ALTER TABLE users ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE;
 
 CREATE TABLE packet_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,4 +22,9 @@ CREATE TABLE packet_data (
 );
 
 SELECT * from packet_data; 
+
+INSERT INTO users (username, password, name, email)
+VALUES ("admin", "admin1234#", "Noob", "noob123@gmail.com");
+
+SELECT * from users;
 
