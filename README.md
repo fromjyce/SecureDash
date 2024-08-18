@@ -35,4 +35,4 @@ All the programs in this repository are licensed under the MIT License. You can 
 
 ## My Social Profiles
 
-- [LinkedIn](https://www.linkedin.com/in/jayashrek/)
+[LINKEDIN](https://www.linkedin.com/in/jayashrek/)
