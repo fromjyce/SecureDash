@@ -16,7 +16,7 @@ headers = {'Content-Type': 'application/json'}
 
 db_config = {
     'user': 'root',
-    'password': 'Jayas1709#',
+    'password': '###',
     'host': 'localhost',
     'database': 'securedash',
 }
